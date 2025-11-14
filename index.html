@@ -3025,9 +3025,28 @@ html += `<div style="padding:8px;margin:4px 0;background:#0a0e14;border-left:3px
 function renderZoneOnBoot(){ renderZoneChips(); }
 function weekInit(){ const el=document.getElementById('weekBody'); if(el) el.innerHTML=''; }
 renderZoneOnBoot(); renderCal(); weekInit();
-  function startScheduledSession(dayKey, sessionIdx){
-  alert(`Starting session ${sessionIdx + 1}`);
-  // Add your training logic here
+ function startScheduledSession(dayKey, sessionIdx){
+  // Get the schedule data
+  const weekScheduleData = LS.get('elite_week_schedule', {});
+  const dayData = weekScheduleData[dayKey];
+  
+  if(!dayData || !dayData.sessions) return;
+  
+  const session = dayData.sessions[sessionIdx];
+  
+  // Check if this is the S&C session
+  if(session.type === 'Strength & Conditioning' && session.workout){
+    // Open training logger with the workout
+    currentTrainingDay = dayKey;
+    
+    const loggerContent = document.getElementById('trainingLoggerContent');
+    loggerContent.innerHTML = createInteractiveWorkout(session.workout, dayKey);
+    
+    document.getElementById('trainingLoggerModal').classList.add('show');
+  } else {
+    // For skill sessions, just show a message
+    alert(`Starting ${session.type} - Duration: ${session.duration} min`);
+  }
 }
 </script>
 </body>
