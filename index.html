@@ -3091,6 +3091,46 @@ function openBJJLogger(dayKey, session){
   
   document.getElementById('trainingLoggerModal').classList.add('show');
 }
+
+function openBJJLogger(dayKey, session){
+  currentTrainingDay = dayKey;
+  
+  const loggerContent = document.getElementById('trainingLoggerContent');
+  loggerContent.innerHTML = `
+    <div class="sec">
+      <div class="hd">🥋 BJJ Training Session</div>
+      <div class="bd">
+        <div class="grid2">
+          <div><label>Duration (min)</label><input id="bjjLogDuration" type="number" value="${session.duration || 60}"></div>
+          <div><label>Intensity</label>
+            <select id="bjjLogIntensity">
+              <option ${session.intensity === 'Light' ? 'selected' : ''}>Light</option>
+              <option ${session.intensity === 'Medium' ? 'selected' : ''}>Medium</option>
+              <option ${session.intensity === 'Hard' ? 'selected' : ''}>Hard</option>
+              <option ${session.intensity === 'Max' ? 'selected' : ''}>Max</option>
+            </select>
+          </div>
+          <div><label>Weight Before (lb)</label><input id="bjjLogWeightBefore" type="number" step="0.1"></div>
+          <div><label>Weight After (lb)</label><input id="bjjLogWeightAfter" type="number" step="0.1"></div>
+          <div><label>Feel</label>
+            <select id="bjjLogFeel">
+              <option>Great</option>
+              <option>Good</option>
+              <option>Tired</option>
+              <option>Beat</option>
+            </select>
+          </div>
+          <div><label>Sleep Last Night (h)</label><input id="bjjLogSleep" type="number" step="0.5"></div>
+        </div>
+        <div style="margin-top:12px">
+          <label>Session Notes</label>
+          <textarea id="bjjLogNotes" style="width:100%;min-height:100px" placeholder="Techniques worked on, rolls, key moments..."></textarea>
+        </div>
+      </div>
+    </div>`;
+  
+  document.getElementById('trainingLoggerModal').classList.add('show');
+}
 </script>
 </body>
 </html>
