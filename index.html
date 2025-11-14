@@ -3005,7 +3005,7 @@ function displayDaySchedule(dayKey){
   const sortedSessions = dayData.sessions.sort((a,b) => (a.time || '').localeCompare(b.time || ''));
   
   sortedSessions.forEach((session, idx) => {
-  html += `<div style="padding:8px;margin:4px 0;background:#0a0e14;border-left:3px solid #00ccff;border-radius:4px;display:flex;justify-content:space-between;align-items:center">`;
+html += `<div style="padding:8px;margin:4px 0;background:#0a0e14;border-left:3px solid #00ccff;border-radius:4px;display:flex;justify-content:space-between;align-items:center">`;
   html += `<div>`;
   html += `<div style="font-weight:700;color:#00ccff">${session.time || 'TBD'} - ${session.type || 'Training'}</div>`;
   if(session.duration) html += `<div class="muted sm">Duration: ${session.duration} min</div>`;
